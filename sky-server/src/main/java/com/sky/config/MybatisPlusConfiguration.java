@@ -17,7 +17,6 @@ public class MybatisPlusConfiguration {
 
     /**
      * 注册MyBatis-Plus分页拦截器
-     * 解决MyBatis-Plus 3.5.9+版本分页查询total为0的问题
      * @return MybatisPlusInterceptor
      */
     @Bean

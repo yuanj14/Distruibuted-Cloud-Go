@@ -24,6 +24,13 @@ public interface DishMapper extends BaseMapper<Dish> {
     @Select("select count(id) from dish where category_id = #{categoryId}")
     Integer countByCategoryId(Long categoryId);
 
+    /**
+     * mp分页查询 封装结果对象IPage<E>  E单条数据类型
+     * @param page
+     * @param dishPageQueryDTO
+     * @param queryWrapper
+     * @return
+     */
     IPage<DishVO> pageQuery(Page<DishVO> page,
                     @Param("dto") DishPageQueryDTO dishPageQueryDTO,
                     @Param(Constants.WRAPPER) LambdaQueryWrapper<Dish> queryWrapper);

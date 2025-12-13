@@ -9,6 +9,6 @@
         dish d
         LEFT JOIN
         category c ON d.category_id = c.id
-        ${ew.customSqlSegment}  <!-- 接收MP Lambda拼接的条件 -->
+        ${ew.customSqlSegment}
     </select>
 </mapper>

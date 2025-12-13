@@ -9,6 +9,7 @@ import com.sky.po.Category;
 import com.sky.po.Dish;
 import com.sky.po.Employee;
 import com.sky.result.PageResult;
+import com.sky.vo.DishVO;
 
 import java.util.List;
 
@@ -19,4 +20,9 @@ public interface DishService extends IService<Dish> {
 
     PageResult pageQuery(DishPageQueryDTO dishPageQueryDTO);
 
+    void deleteByBatch(List<Long> ids);
+
+    DishVO getByIdWithFlavor(Long id);
+
+    void updateWithFlavor(DishDTO dishDTO);
 }
