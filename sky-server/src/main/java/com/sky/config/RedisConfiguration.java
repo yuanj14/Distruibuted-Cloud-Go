@@ -49,14 +49,14 @@ public class RedisConfiguration {
         // key 使用 String 序列化器
         redisTemplate.setKeySerializer(stringRedisSerializer);
 
-        // 这个配置会应用到：String、List、Set、ZSet 的 value
-        redisTemplate.setValueSerializer(jsonRedisSerializer);
-        
-        // 这个配置只应用到：Hash 的 field
-        redisTemplate.setHashKeySerializer(stringRedisSerializer);
-
-        // 这个配置只应用到：Hash 的 field value
-        redisTemplate.setHashValueSerializer(jsonRedisSerializer);
+//        // 这个配置会应用到：String、List、Set、ZSet 的 value
+//        redisTemplate.setValueSerializer(jsonRedisSerializer);
+//
+//        // 这个配置只应用到：Hash 的 field
+//        redisTemplate.setHashKeySerializer(stringRedisSerializer);
+//
+//        // 这个配置只应用到：Hash 的 field value
+//        redisTemplate.setHashValueSerializer(jsonRedisSerializer);
 
         return redisTemplate;
     }

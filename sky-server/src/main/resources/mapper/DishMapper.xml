@@ -9,10 +9,12 @@
         dish d
         LEFT JOIN
         category c ON d.category_id = c.id
-        ${ew.customSqlSegment}
+        <if test="ew != null">
+            ${ew.customSqlSegment}
+        </if>
     </select>
 
-    <select id="list" resultType="Dish" parameterType="Dish">
+    <select id="list" resultType="com.sky.po.Dish" parameterType="com.sky.po.Dish">
         select * from dish
         <where>
             <if test="name != null">
