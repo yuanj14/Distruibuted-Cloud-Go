@@ -1,14 +1,8 @@
 package com.sky.mapper;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.sky.po.Dish;
 import com.sky.po.ShoppingCart;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 /**
  * <p>
@@ -20,7 +14,5 @@ import java.util.List;
  */
 @Mapper
 public interface ShoppingCartMapper extends BaseMapper<ShoppingCart> {
-    List<ShoppingCart> list(
-            @Param("shoppingCart") ShoppingCart shoppingCart,
-            @Param(Constants.WRAPPER) LambdaQueryWrapper<ShoppingCart> queryWrapper);
+
 }

@@ -22,5 +22,4 @@ public interface ShoppingCartService extends IService<ShoppingCart> {
 
     void cleanShoppingCart();
 
-
 }

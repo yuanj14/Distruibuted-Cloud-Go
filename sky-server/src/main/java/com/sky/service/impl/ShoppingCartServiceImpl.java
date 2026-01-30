@@ -67,7 +67,7 @@ public class ShoppingCartServiceImpl extends ServiceImpl<ShoppingCartMapper, Sho
                         ShoppingCart::getDishFlavor,
                         shoppingCartDTO.getDishFlavor()
                 );
-        List<ShoppingCart> list = shoppingCartMapper.list(shoppingCart, queryWrapper);
+        List<ShoppingCart> list = shoppingCartMapper.selectList(queryWrapper);
         // 存在数量 number + 1
         if (list != null && !list.isEmpty()) {
             ShoppingCart cart = list.get(0);
@@ -104,7 +104,7 @@ public class ShoppingCartServiceImpl extends ServiceImpl<ShoppingCartMapper, Sho
     @Override
     public List<ShoppingCart> showShoppingCart() {
         Long userId = BaseContext.getCurrentId();
-        List<ShoppingCart> res = shoppingCartMapper.list(null,
+        List<ShoppingCart> res = shoppingCartMapper.selectList(
                 new LambdaQueryWrapper<ShoppingCart>()
                         .eq(ShoppingCart::getUserId, userId)
         );
@@ -118,8 +118,8 @@ public class ShoppingCartServiceImpl extends ServiceImpl<ShoppingCartMapper, Sho
     public void cleanShoppingCart() {
         Long userId = BaseContext.getCurrentId();
         shoppingCartMapper.delete(
-               new LambdaQueryWrapper<ShoppingCart>()
-                       .eq(ShoppingCart::getUserId, userId)
-       );
+                new LambdaQueryWrapper<ShoppingCart>()
+                        .eq(ShoppingCart::getUserId, userId)
+        );
     }
 }
