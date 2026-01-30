@@ -1,6 +1,8 @@
 package com.sky.mapper;
 
-import com.github.pagehelper.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.ibatis.annotations.Param;
 import com.sky.dto.SetmealPageQueryDTO;
 import com.sky.po.Setmeal;
 import com.sky.vo.DishItemVO;
@@ -25,7 +27,13 @@ public interface SetmealMapper {
 
     void insert(Setmeal setmeal);
 
-    Page<SetmealVO> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
+    /**
+     * 分页查询套餐
+     * @param page 分页对象
+     * @param setmealPageQueryDTO 查询条件
+     * @return
+     */
+    IPage<SetmealVO> pageQuery(Page<SetmealVO> page, @Param("dto") SetmealPageQueryDTO setmealPageQueryDTO);
 
     /**
      * 根据id查询套餐

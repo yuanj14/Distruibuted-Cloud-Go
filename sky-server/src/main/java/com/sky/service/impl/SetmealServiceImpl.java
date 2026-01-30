@@ -1,7 +1,7 @@
 package com.sky.service.impl;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sky.constant.MessageConstant;
 import com.sky.constant.StatusConstant;
 import com.sky.dto.SetmealDTO;
@@ -74,9 +74,9 @@ public class SetmealServiceImpl implements SetmealService {
         int pageNum = setmealPageQueryDTO.getPage();
         int pageSize = setmealPageQueryDTO.getPageSize();
 
-        PageHelper.startPage(pageNum, pageSize);
-        Page<SetmealVO> page = setmealMapper.pageQuery(setmealPageQueryDTO);
-        return new PageResult(page.getTotal(), page.getResult());
+        Page<SetmealVO> page = new Page<>(pageNum, pageSize);
+        IPage<SetmealVO> pageResult = setmealMapper.pageQuery(page, setmealPageQueryDTO);
+        return new PageResult(pageResult.getTotal(), pageResult.getRecords());
     }
 
     @Override

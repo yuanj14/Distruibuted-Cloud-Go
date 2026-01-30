@@ -67,7 +67,7 @@ public class ShoppingCartServiceImpl extends ServiceImpl<ShoppingCartMapper, Sho
                         ShoppingCart::getDishFlavor,
                         shoppingCartDTO.getDishFlavor()
                 );
-        List<ShoppingCart> list = shoppingCartMapper.list(shoppingCart, queryWrapper);
+        List<ShoppingCart> list = shoppingCartMapper.selectList(queryWrapper);
         // 存在数量 number + 1
         if (list != null && !list.isEmpty()) {
             ShoppingCart cart = list.get(0);
@@ -98,17 +98,50 @@ public class ShoppingCartServiceImpl extends ServiceImpl<ShoppingCartMapper, Sho
     }
 
     /**
-     *
+     * 查看购物车
      * @return
      */
     @Override
     public List<ShoppingCart> showShoppingCart() {
         Long userId = BaseContext.getCurrentId();
-        List<ShoppingCart> res = shoppingCartMapper.list(null,
+        List<ShoppingCart> res = shoppingCartMapper.selectList(
                 new LambdaQueryWrapper<ShoppingCart>()
                         .eq(ShoppingCart::getUserId, userId)
         );
         return res;
+    }
+
+    /**
+     * 减少购物车商品数量
+     * @param shoppingCartDTO
+     */
+    @Override
+    public void subShoppingCart(ShoppingCartDTO shoppingCartDTO) {
+        Long userId = BaseContext.getCurrentId();
+
+        LambdaQueryWrapper<ShoppingCart> queryWrapper = new LambdaQueryWrapper<ShoppingCart>()
+                .eq(ShoppingCart::getUserId, userId)
+                .eq(shoppingCartDTO.getSetmealId() != null,
+                        ShoppingCart::getSetmealId,
+                        shoppingCartDTO.getSetmealId())
+                .eq(shoppingCartDTO.getDishId() != null,
+                        ShoppingCart::getDishId,
+                        shoppingCartDTO.getDishId())
+                .eq(shoppingCartDTO.getDishFlavor() != null,
+                        ShoppingCart::getDishFlavor,
+                        shoppingCartDTO.getDishFlavor());
+
+        ShoppingCart cart = shoppingCartMapper.selectOne(queryWrapper);
+        if (cart != null) {
+            if (cart.getNumber() > 1) {
+                // 数量大于1，减1
+                cart.setNumber(cart.getNumber() - 1);
+                shoppingCartMapper.updateById(cart);
+            } else {
+                // 数量为1，删除该条记录
+                shoppingCartMapper.deleteById(cart.getId());
+            }
+        }
     }
 
     /**
@@ -118,8 +151,8 @@ public class ShoppingCartServiceImpl extends ServiceImpl<ShoppingCartMapper, Sho
     public void cleanShoppingCart() {
         Long userId = BaseContext.getCurrentId();
         shoppingCartMapper.delete(
-               new LambdaQueryWrapper<ShoppingCart>()
-                       .eq(ShoppingCart::getUserId, userId)
-       );
+                new LambdaQueryWrapper<ShoppingCart>()
+                        .eq(ShoppingCart::getUserId, userId)
+        );
     }
 }
