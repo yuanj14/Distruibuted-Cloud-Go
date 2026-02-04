@@ -1,0 +1,46 @@
+package com.sky.service;
+
+import com.sky.vo.OrderReportVO;
+import com.sky.vo.SalesTop10ReportVO;
+import com.sky.vo.TurnoverReportVO;
+import com.sky.vo.UserReportVO;
+
+import java.time.LocalDate;
+
+/**
+ * 统计报表Service接口
+ */
+public interface ReportService {
+
+    /**
+     * 统计指定时间区间内的营业额数据
+     * @param begin 开始日期
+     * @param end 结束日期
+     * @return 营业额报表VO
+     */
+    TurnoverReportVO getTurnoverStatistics(LocalDate begin, LocalDate end);
+
+    /**
+     * 统计指定时间区间内的用户数据
+     * @param begin 开始日期
+     * @param end 结束日期
+     * @return 用户报表VO
+     */
+    UserReportVO getUserStatistics(LocalDate begin, LocalDate end);
+
+    /**
+     * 统计指定时间区间内的订单数据
+     * @param begin 开始日期
+     * @param end 结束日期
+     * @return 订单报表VO
+     */
+    OrderReportVO getOrderStatistics(LocalDate begin, LocalDate end);
+
+    /**
+     * 统计指定时间区间内的销量排名前10
+     * @param begin 开始日期
+     * @param end 结束日期
+     * @return 销量排名报表VO
+     */
+    SalesTop10ReportVO getSalesTop10(LocalDate begin, LocalDate end);
+}
