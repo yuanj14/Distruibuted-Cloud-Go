@@ -31,6 +31,7 @@ import com.sky.vo.OrderPaymentVO;
 import com.sky.vo.OrderStatisticsVO;
 import com.sky.vo.OrderSubmitVO;
 import com.sky.vo.OrderVO;
+import com.sky.websocket.WebSocketServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private WeChatPayUtil weChatPayUtil;
+
+    @Autowired
+    private WebSocketServer webSocketServer;
 
     @Value("${sky.shop.address}")
     private String shopAddress;
@@ -199,6 +203,36 @@ public class OrderServiceImpl implements OrderService {
                 .build();
 
         orderMapper.updateById(orders);
+
+        // 通过WebSocket向商家端推送来单提醒
+        Map<String, Object> map = new HashMap<>();
+        map.put("type", 1); // 1-来单提醒 2-客户催单
+        map.put("orderId", ordersDB.getId());
+        map.put("content", "订单号：" + outTradeNo);
+        webSocketServer.sendToAllClient(JSONObject.toJSONString(map));
+    }
+
+    /**
+     * 客户催单
+     *
+     * @param id
+     */
+    @Override
+    public void reminder(Long id) {
+        // 根据id查询订单
+        Orders ordersDB = orderMapper.selectById(id);
+
+        // 校验订单是否存在
+        if (ordersDB == null) {
+            throw new OrderBusinessException(MessageConstant.ORDER_NOT_FOUND);
+        }
+
+        // 通过WebSocket向商家端推送催单提醒
+        Map<String, Object> map = new HashMap<>();
+        map.put("type", 2); // 1-来单提醒 2-客户催单
+        map.put("orderId", id);
+        map.put("content", "订单号：" + ordersDB.getNumber());
+        webSocketServer.sendToAllClient(JSONObject.toJSONString(map));
     }
 
     /**
