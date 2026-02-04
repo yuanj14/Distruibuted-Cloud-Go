@@ -20,14 +20,14 @@
         on
         s.category_id = c.id
         <where>
-            <if test="name != null">
-                and s.name like concat('%',#{name},'%')
+            <if test="dto.name != null">
+                and s.name like concat('%',#{dto.name},'%')
             </if>
-            <if test="status != null">
-                and s.status = #{status}
+            <if test="dto.status != null">
+                and s.status = #{dto.status}
             </if>
-            <if test="categoryId != null">
-                and s.category_id = #{categoryId}
+            <if test="dto.categoryId != null">
+                and s.category_id = #{dto.categoryId}
             </if>
         </where>
         order by s.create_time desc
@@ -69,4 +69,17 @@
         </set>
         where id = #{id}
     </update>
+
+    <!--根据条件统计套餐数量-->
+    <select id="countByMap" resultType="java.lang.Integer">
+        select count(id) from setmeal
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+        </where>
+    </select>
 </mapper>
