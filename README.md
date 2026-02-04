@@ -1,13 +1,19 @@
-# 🌟 苍穹外卖 - MyBatis-Plus 重写
+<p align="center">
+  <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="Spring Logo" width="80" height="80">
+</p>
+
+<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">sky-mybatis-plus</h1>
+<h4 align="center">基于 Spring Boot + MyBatis-Plus 的外卖点餐系统</h4>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Spring%20Boot-2.7.x-brightgreen" alt="Spring Boot">
   <img src="https://img.shields.io/badge/MyBatis--Plus-3.5.x-blue" alt="MyBatis-Plus">
   <img src="https://img.shields.io/badge/Redis-7.x-red" alt="Redis">
   <img src="https://img.shields.io/badge/MySQL-8.0-orange" alt="MySQL">
+  <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License">
 </p>
 
-> 👉 基于黑马《苍穹外卖》项目，使用 **MyBatis-Plus** 进行数据层全面重构，简化 CRUD 代码，提升开发效率。
+---
 
 ## 📚 项目简介
 
