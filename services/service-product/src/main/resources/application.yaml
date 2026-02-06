@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: service-product
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      username: nacos
+      password: nacos
+      discovery:
+        enabled: true
+  config:
+    import:
+      optional:nacos:service-product.yaml
+server:
+  port: 9000
+

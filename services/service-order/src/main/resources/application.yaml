@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: service-order
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      username: nacos
+      password: nacos
+      discovery:
+        enabled: true
+  config:
+    import: optional:nacos:service-order.yaml
+server:
+  port: 8000
+
