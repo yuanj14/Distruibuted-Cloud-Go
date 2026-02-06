@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 
 @Configuration
 public class NacosConfig {
-
+//    配置中心日志监听
     @Bean
     ApplicationRunner applicationRunner(NacosConfigManager nacosConfigManager) {
         return args -> {

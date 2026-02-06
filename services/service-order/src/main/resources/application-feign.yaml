@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connect-timeout: 5000
+            read-timeout: 5000
+            logger-level: FULL
+          service-product:
+            connect-timeout: 3000
+            read-timeout: 3000
+
+logging:
+  level:
+    com.czu.order.feign: DEBUG
+
+feign:
+  sentinel:
+    enabled: true
