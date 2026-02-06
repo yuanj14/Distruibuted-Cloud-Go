@@ -1,0 +1,27 @@
+version: '3.8'
+name: spring-cloud
+
+services:
+  # Nacos 服务注册与配置中心
+  spring-nacos:
+    image: nacos/nacos-server:v2.5.2
+    container_name: spring-nacos
+    environment:
+      - MODE=standalone
+      - NACOS_AUTH_ENABLE=true
+      - NACOS_AUTH_TOKEN=SecretKey012345678901234567890123456789012345678901234567890123456789
+      - NACOS_AUTH_IDENTITY_KEY=serverIdentity
+      - NACOS_AUTH_IDENTITY_VALUE=security
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+      - "9849:9849"
+    volumes:
+      - ./nacos/logs:/home/nacos/logs
+      - ./nacos/data:/home/nacos/data
+    networks:
+      - spring-network
+# 容器通信
+networks:
+  spring-network:
+    driver: bridge
