@@ -34,12 +34,4 @@ public class OrderController {
         Product product = productFeignClient.getProductById(productId);
         return "下单成功！商品：" + product.getName() + "，价格：" + product.getPrice();
     }
-
-    /**
-     * 查看可购买商品列表
-     */
-    @GetMapping("/products")
-    public List<Product> getProducts() {
-        return productFeignClient.getAllProducts();
-    }
 }
