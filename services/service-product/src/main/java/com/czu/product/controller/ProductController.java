@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/product")
 public class ProductController {
 
     @SentinelResource(value = "getProductById", blockHandler = "getProductByIdBlockHandler")

@@ -3,15 +3,25 @@ spring:
     name: gateway
   cloud:
     gateway:
+      globalcors:
+# CORS configuration
+        cors-configurations:
+          '[/**]':
+            allowedOriginPatterns: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
       routes:
         - id: order-route
           uri: lb://service-order
           predicates:
             - Path=/api/order/**
+            - RewritePath=/api/order/(?<segment>.*), /$\{segment}
         - id: product-route
           uri: lb://service-product
           predicates:
             - Path=/api/product/**
+            - RewritePath=/api/product/(?<segment>.*), /$\{segment}
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
@@ -19,4 +29,6 @@ spring:
         password: nacos
 server:
   port: 80
+
+
 

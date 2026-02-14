@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-@RequestMapping("/api/order")
 public class OrderController {
 
     @Autowired
