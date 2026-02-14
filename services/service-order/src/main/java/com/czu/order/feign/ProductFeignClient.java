@@ -5,6 +5,7 @@ import com.czu.order.feign.fallback.ProductFeignClientFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -17,7 +18,6 @@ public interface ProductFeignClient {
     /**
      * 根据ID获取商品信息
      */
-    @GetMapping("/product/{id}")
+    @GetMapping("/{id}")
     Product getProductById(@PathVariable("id") Long id);
-
 }
