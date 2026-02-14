@@ -10,6 +10,11 @@ spring:
           service-product:
             connect-timeout: 3000
             read-timeout: 3000
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      eager: true
+      web-context-unify: false
 
 logging:
   level:

@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: feign
   application:
     name: service-product
   cloud:
@@ -6,11 +8,12 @@ spring:
       server-addr: localhost:8848
       username: nacos
       password: nacos
-      discovery:
-        enabled: true
+      config:
+        import-check:
+          enabled: false
   config:
     import:
-      optional:nacos:service-product.yaml
+      nacos:service-product.yaml
 server:
   port: 9000
 
