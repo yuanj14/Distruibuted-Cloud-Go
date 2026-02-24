@@ -1,0 +1,36 @@
+version: '3.8'
+name: Ruoyi-Vue3-Vite
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-vue3
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: ry-vue
+      TZ: Asia/Shanghai
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/logs:/var/log/mysql
+    networks:
+      - ruoyi-network
+
+  redis:
+    image: redis/redis-stack:latest
+    container_name: redis-vue3
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+    volumes:
+      - ./redis/data:/data
+      - ./redis/logs:/logs
+    networks:
+      - ruoyi-network
+
+networks:
+  ruoyi-network:
+    driver: bridge

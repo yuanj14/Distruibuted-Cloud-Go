@@ -36,6 +36,9 @@ dist/
 nbdist/
 .nb-gradle/
 
+### Docker ###
+docker/*/data/*
+docker/*/logs/*
 ######################################################################
 # Others
 *.log
